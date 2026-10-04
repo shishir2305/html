@@ -1,0 +1,742 @@
+<!--
+========================================================
+ACCESSIBILITY + NATIVE HTML vs ARIA
+========================================================
+
+ACCESSIBILITY (A11Y)
+--------------------
+Accessibility means building websites that can be used by
+people with disabilities, including users who rely on:
+
+• Screen readers
+• Keyboard navigation
+• Voice control
+• Magnification
+• High-contrast modes
+• Other assistive technologies
+
+
+========================================================
+1. USE SEMANTIC HTML FIRST
+========================================================
+
+<!-- GOOD -->
+<button type="button">Delete</button>
+<!-- Native button already provides:
+     → Keyboard support
+     → Button semantics
+     → Focus behavior
+     → Screen-reader information -->
+
+
+<!-- BAD -->
+<div onclick="deleteItem()">Delete</div>
+<!-- <div> has no button semantics by default.
+     You would have to recreate many behaviors manually. -->
+
+
+<!-- GOOD -->
+<nav>
+    <a href="/products">Products</a>
+</nav>
+<!-- Native <nav> + <a> provide meaningful semantics -->
+
+
+<!-- BAD -->
+<div onclick="goToProducts()">Products</div>
+<!-- Not a real link; poor keyboard/accessibility behavior -->
+
+
+<!-- GOOD -->
+<input
+    type="email"
+    id="email"
+    name="email"
+>
+
+<label for="email">Email</label>
+<!-- Native form controls already provide useful semantics -->
+
+
+<!--
+RULE:
+
+Prefer:
+
+<button>
+<a>
+<input>
+<select>
+<textarea>
+<nav>
+<header>
+<main>
+<footer>
+<article>
+<section>
+
+over generic:
+
+<div>
+<span>
+
+whenever the native element represents the meaning you need.
+-->
+
+
+========================================================
+2. WHAT IS ARIA?
+========================================================
+
+ARIA = Accessible Rich Internet Applications
+
+ARIA provides attributes that communicate additional
+semantics/state information to assistive technologies.
+
+Examples:
+
+aria-label
+aria-labelledby
+aria-describedby
+aria-hidden
+aria-expanded
+aria-controls
+aria-current
+aria-live
+role
+
+
+========================================================
+3. NATIVE HTML vs ARIA
+========================================================
+
+<!-- Native HTML -->
+<button type="button">
+    Menu
+</button>
+
+
+<!-- ARIA version -->
+<div role="button" tabindex="0">
+    Menu
+</div>
+
+<!-- The second version is NOT automatically equivalent.
+
+     You may also need:
+     → Keyboard handling
+     → Enter/Space behavior
+     → Focus behavior
+     → Correct state management
+
+     Therefore:
+
+     NATIVE HTML > ARIA recreation
+-->
+
+
+========================================================
+4. FIRST RULE OF ARIA
+========================================================
+
+<!--
+THE FIRST RULE OF ARIA:
+
+"If you can use a native HTML element or attribute
+that already provides the required semantics and behavior,
+use the native HTML element."
+
+Example:
+-->
+
+<!-- GOOD -->
+<button>Save</button>
+
+
+<!-- Usually unnecessary -->
+<div role="button">Save</div>
+
+
+<!--
+ARIA should generally ADD accessibility information,
+not replace native HTML behavior.
+-->
+
+
+========================================================
+5. aria-label
+========================================================
+
+<!-- Useful when an interactive element has no visible text -->
+
+<button aria-label="Close">
+    ×
+</button>
+
+<!-- Screen reader can announce:
+     "Close, button"
+-->
+
+
+<!-- Usually unnecessary -->
+<button aria-label="Save">
+    Save
+</button>
+
+<!-- The visible "Save" text already provides the accessible name. -->
+
+
+========================================================
+6. aria-labelledby
+========================================================
+
+<h2 id="dialog-title">Delete account</h2>
+
+<div
+    role="dialog"
+    aria-labelledby="dialog-title"
+>
+    Are you sure you want to delete your account?
+</div>
+
+<!--
+aria-labelledby points to another element whose text
+becomes the accessible name.
+-->
+
+
+========================================================
+7. aria-describedby
+========================================================
+
+<label for="password">Password</label>
+
+<input
+    type="password"
+    id="password"
+    aria-describedby="password-help"
+>
+
+<p id="password-help">
+    Password must contain at least 8 characters.
+</p>
+
+<!--
+The input's accessible description can include:
+"Password must contain at least 8 characters."
+-->
+
+
+========================================================
+8. aria-expanded
+========================================================
+
+<button
+    aria-expanded="false"
+    aria-controls="menu"
+>
+    Menu
+</button>
+
+<ul id="menu" hidden>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/settings">Settings</a></li>
+</ul>
+
+<!--
+aria-expanded tells assistive technologies whether
+the controlled content is currently expanded.
+
+false → collapsed
+true  → expanded
+
+IMPORTANT:
+JavaScript must update this value when the state changes.
+-->
+
+
+========================================================
+9. aria-controls
+========================================================
+
+<button
+    aria-expanded="false"
+    aria-controls="menu"
+>
+    Menu
+</button>
+
+<ul id="menu" hidden>
+    ...
+</ul>
+
+<!--
+aria-controls establishes a relationship between
+the control and the element it controls.
+
+It does NOT automatically show/hide the element.
+JavaScript/CSS must handle the actual behavior.
+-->
+
+
+========================================================
+10. aria-hidden
+========================================================
+
+<!-- Hide decorative content from assistive technologies -->
+
+<span aria-hidden="true">✨</span>
+
+
+<!--
+Useful for decorative icons where the surrounding
+text already provides the meaning.
+
+IMPORTANT:
+Do NOT use aria-hidden="true" on content that
+the user needs to understand or interact with.
+-->
+
+
+========================================================
+11. aria-current
+========================================================
+
+<nav>
+    <a href="/home" aria-current="page">Home</a>
+    <a href="/products">Products</a>
+    <a href="/about">About</a>
+</nav>
+
+<!--
+aria-current identifies the user's current location.
+
+Common values:
+
+page
+step
+location
+date
+time
+true
+false
+-->
+
+
+========================================================
+12. aria-live
+========================================================
+
+<div aria-live="polite">
+    Your changes have been saved.
+</div>
+
+<!--
+Useful for dynamically changing content that a screen reader
+should be informed about.
+
+polite
+→ Announces when the user is idle.
+
+assertive
+→ Announces immediately; use sparingly.
+-->
+
+
+========================================================
+13. IMAGES
+========================================================
+
+<!-- Meaningful image -->
+<img
+    src="profile.jpg"
+    alt="Shishir smiling"
+>
+
+
+<!-- Decorative image -->
+<img
+    src="divider.svg"
+    alt=""
+>
+
+<!--
+alt="" tells assistive technologies that the image
+is decorative and can be ignored.
+-->
+
+
+<!-- BAD -->
+<img
+    src="profile.jpg"
+    aria-label="Profile image"
+>
+
+<!--
+For <img>, use alt for the image's text alternative.
+Don't unnecessarily replace native image semantics with ARIA.
+-->
+
+
+========================================================
+14. FORM ACCESSIBILITY
+========================================================
+
+<label for="email">Email</label>
+
+<input
+    type="email"
+    id="email"
+    name="email"
+    required
+>
+
+<!--
+Native <label> + <input> provides the correct relationship.
+
+Do NOT rely only on placeholder:
+
+<input placeholder="Email">
+
+Placeholder is NOT a replacement for a label.
+-->
+
+
+========================================================
+15. HEADINGS
+========================================================
+
+<h1>Products</h1>
+
+<h2>Popular Products</h2>
+
+<h2>New Products</h2>
+
+<!--
+Native heading elements provide document structure.
+
+Don't do this just for styling:
+
+<div role="heading" aria-level="1">
+    Products
+</div>
+
+Use <h1> instead.
+-->
+
+
+========================================================
+16. LANDMARK ELEMENTS
+========================================================
+
+<header>
+    ...
+</header>
+
+<nav>
+    ...
+</nav>
+
+<main>
+    ...
+</main>
+
+<aside>
+    ...
+</aside>
+
+<footer>
+    ...
+</footer>
+
+<!--
+Semantic landmarks allow screen-reader users
+to navigate major page sections quickly.
+
+Prefer native landmarks over:
+
+<div role="banner">
+<div role="navigation">
+<div role="main">
+<div role="contentinfo">
+
+when the native HTML element is appropriate.
+-->
+
+
+========================================================
+17. KEYBOARD ACCESSIBILITY
+========================================================
+
+<!-- GOOD -->
+<button onclick="deleteItem()">
+    Delete
+</button>
+
+
+<!-- BAD -->
+<div onclick="deleteItem()">
+    Delete
+</div>
+
+<!--
+Native button automatically supports keyboard interaction.
+
+A clickable <div> may require you to manually implement:
+→ tabindex
+→ Enter handling
+→ Space handling
+→ Focus behavior
+→ Appropriate role
+
+Avoid recreating native controls.
+-->
+
+
+========================================================
+18. tabindex
+========================================================
+
+<!-- Usually good -->
+<button>Save</button>
+
+
+<!-- Can make an element keyboard-focusable -->
+<div tabindex="0">
+    Custom interactive element
+</div>
+
+
+<!-- Avoid -->
+<div tabindex="1">...</div>
+<div tabindex="2">...</div>
+
+<!--
+Positive tabindex values create custom focus order
+and can make keyboard navigation confusing.
+
+Prefer:
+
+tabindex="0"
+→ Normal keyboard tab order
+
+tabindex="-1"
+→ Programmatically focusable but not normally reached
+  through Tab navigation.
+-->
+
+
+========================================================
+19. DO NOT OVERUSE ARIA
+========================================================
+
+<!-- BAD -->
+<button
+    role="button"
+    aria-label="Save"
+>
+    Save
+</button>
+
+<!--
+Most of this is redundant.
+
+Better:
+-->
+
+<button>Save</button>
+
+
+<!-- Another example -->
+
+<input
+    type="checkbox"
+    role="checkbox"
+>
+
+<!--
+Native checkbox already has checkbox semantics.
+Don't add redundant ARIA.
+-->
+
+
+========================================================
+20. ARIA DOES NOT ADD BEHAVIOR
+========================================================
+
+<button aria-expanded="false">
+    Menu
+</button>
+
+<!--
+ARIA communicates state.
+
+It does NOT automatically:
+
+→ Open the menu
+→ Close the menu
+→ Handle keyboard events
+→ Manage focus
+→ Change CSS
+→ Execute JavaScript
+
+Your application still has to implement the behavior.
+-->
+
+
+========================================================
+21. ARIA CAN OVERRIDE NATIVE SEMANTICS
+========================================================
+
+<button role="heading">
+    Save
+</button>
+
+<!--
+This can destroy/alter the expected button semantics.
+
+Don't use ARIA to change native semantics unless
+you have a very specific, valid reason.
+-->
+
+
+========================================================
+22. ACCESSIBLE NAME
+========================================================
+
+<!-- Visible text -->
+<button>Save</button>
+
+
+<!-- aria-label -->
+<button aria-label="Close">
+    ×
+</button>
+
+
+<!-- aria-labelledby -->
+<h2 id="title">Settings</h2>
+
+<button aria-labelledby="title">
+    ⚙
+</button>
+
+<!--
+The accessible name is what assistive technology
+uses to identify an interactive element.
+
+Prefer visible text when possible.
+Use aria-label / aria-labelledby when necessary.
+-->
+
+
+========================================================
+23. NATIVE HTML vs ARIA — DECISION RULE
+========================================================
+
+Need a button?
+        ↓
+Use <button>
+
+Need navigation?
+        ↓
+Use <a href="...">
+
+Need a checkbox?
+        ↓
+Use <input type="checkbox">
+
+Need a text field?
+        ↓
+Use <input>
+
+Need a heading?
+        ↓
+Use <h1>–<h6>
+
+Need navigation landmark?
+        ↓
+Use <nav>
+
+Need main content?
+        ↓
+Use <main>
+
+Need additional accessibility information
+that native HTML cannot express?
+        ↓
+Consider ARIA
+
+
+========================================================
+24. MAANG-LEVEL ACCESSIBILITY CHECKLIST
+========================================================
+
+<!--
+SEMANTIC HTML
+✓ Use correct HTML elements
+✓ Prefer native controls
+✓ Use meaningful headings
+✓ Use landmarks
+
+KEYBOARD
+✓ Everything interactive must be keyboard accessible
+✓ Logical focus order
+✓ Visible focus indicator
+✓ Don't use positive tabindex
+
+FORMS
+✓ Every input has an accessible label
+✓ Use appropriate input types
+✓ Use native validation where appropriate
+✓ Associate help/error messages correctly
+
+IMAGES
+✓ Meaningful images → useful alt
+✓ Decorative images → alt=""
+
+ARIA
+✓ Use ARIA only when necessary
+✓ Don't duplicate native semantics unnecessarily
+✓ Keep ARIA state synchronized with UI state
+✓ Don't use ARIA as a replacement for behavior
+
+DYNAMIC UI
+✓ Manage focus when appropriate
+✓ Announce important dynamic changes
+✓ Use aria-expanded for expandable controls
+✓ Use aria-current for current navigation/state
+
+PERFORMANCE
+✓ Semantic HTML reduces unnecessary custom JS
+✓ Native controls avoid recreating interaction logic
+✓ Less custom accessibility code means fewer bugs
+
+
+========================================================
+MOST IMPORTANT RULE TO REMEMBER
+========================================================
+
+        NATIVE HTML
+             ↓
+      accessibility
+      + behavior
+      + keyboard support
+      + browser semantics
+             ↓
+      USE IT FIRST
+
+             ↓
+       Need something
+       native HTML can't
+       express?
+             ↓
+           ARIA
+
+
+NATIVE HTML > CUSTOM ARIA IMPLEMENTATION
+
+ARIA supplements HTML.
+ARIA does NOT replace semantic HTML.
+ARIA provides semantics, NOT behavior.
+-->

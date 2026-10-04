@@ -1,0 +1,66 @@
+<form action="/submit" method="POST">
+    <!--
+        <form> → Container for user input and form submission.
+
+        action → URL/endpoint where the form data is submitted.
+
+        method → How the data is sent:
+                   GET  → Data goes in the URL
+                   POST → Data is sent in the request body
+    -->
+
+    <label for="name">Name</label>
+    <!-- <label> describes the input and improves accessibility -->
+
+    <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Enter your name"
+    >
+    <!--
+        type        → Type of input
+        id          → Identifies the input; connects it to <label>
+        name        → Name/key sent to the server
+        placeholder → Hint shown inside the input
+    -->
+
+
+    <label for="email">Email</label>
+    <input
+        type="email"
+        id="email"
+        name="email"
+        required
+    >
+    <!--
+        type="email" → Browser provides basic email validation
+        required     → User must provide a value
+    -->
+
+
+    <button type="submit">Submit</button>
+    <!-- Submits the form -->
+
+
+    <button type="reset">Reset</button>
+    <!-- Resets form fields to their initial values -->
+</form>
+
+
+<!--
+IMPORTANT:
+
+• <form> → Groups related user inputs.
+• <label> → Describes an input.
+• <input> → Accepts user data.
+• <textarea> → Multi-line text input.
+• <select> → Dropdown selection.
+• <option> → Item inside <select>.
+• <button> → Performs an action, usually submission.
+
+• Always give inputs a name when their value needs to be submitted.
+• Connect <label> to <input> using for="input-id".
+• Use semantic input types such as email, password, number, date, etc.
+• Use <button> instead of clickable <div>/<span>.
+-->

@@ -1,0 +1,106 @@
+<img
+    src="hero-1200.webp"
+    srcset="
+        hero-400.webp 400w,
+        hero-800.webp 800w,
+        hero-1200.webp 1200w
+    "
+    sizes="100vw"
+    alt="Dashboard showing analytics"
+    width="1200"
+    height="800"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+>
+<!--
+    src            → Fallback/default image URL
+
+    srcset         → Provides multiple image resolutions so the browser
+                     can choose the most appropriate image.
+
+    sizes          → Tells the browser the expected display width of
+                     the image, helping it select the right srcset image.
+
+    alt            → Text alternative for accessibility
+
+    width/height   → Reserves space and reduces layout shift (CLS)
+
+    loading        → Controls when the browser loads the image
+                     eager → Load immediately
+                     lazy  → Delay loading until near the viewport
+
+    decoding       → Hints how the browser should decode the image
+                     async → Decode without unnecessarily blocking rendering
+                     sync  → Prefer synchronous decoding
+                     auto  → Let the browser decide
+
+    fetchpriority  → Hints how important the image request is
+                     high → Important/critical image, e.g. LCP hero image
+                     low  → Less important image
+                     auto → Browser decides
+-->
+
+
+<img
+    src="product-800.webp"
+    srcset="
+        product-400.webp 400w,
+        product-800.webp 800w,
+        product-1200.webp 1200w
+    "
+    sizes="(max-width: 600px) 400px, 800px"
+    alt="Product image"
+    width="800"
+    height="600"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+>
+<!-- Good pattern for a responsive, below-the-fold image -->
+
+
+<!--
+IMPORTANT BEST PRACTICES:
+
+• srcset + sizes
+  → Allow the browser to download an appropriately sized image.
+
+• srcset
+  → Answers: "What image resolutions are available?"
+
+• sizes
+  → Answers: "How wide will the image actually be displayed?"
+
+• loading="lazy"
+  → Use for below-the-fold/non-critical images.
+  → Avoid lazy-loading the main LCP image.
+
+• loading="eager"
+  → Appropriate for important above-the-fold images.
+
+• decoding="async"
+  → Good general choice for most images.
+
+• fetchpriority="high"
+  → Use sparingly for genuinely critical images, typically the LCP image.
+
+• fetchpriority="low"
+  → Useful for less important images.
+
+• Do NOT mark every image as fetchpriority="high".
+  → This defeats resource prioritization.
+
+• width + height
+  → Helps reserve layout space and reduce CLS.
+
+• Optimize the actual image:
+  → Correct dimensions
+  → Compression
+  → WebP/AVIF where appropriate
+  → Responsive srcset/sizes
+
+• Performance rule:
+  Critical/LCP image → eager + high priority
+  Below-fold image  → lazy + low/auto priority
+-->

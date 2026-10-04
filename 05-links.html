@@ -1,0 +1,40 @@
+<a href="https://example.com">Visit Example</a>
+<!-- <a> creates a hyperlink.
+     href specifies the destination URL. -->
+
+
+<a href="/about.html">About</a>
+<!-- Relative URL; navigates to another page within the same website -->
+
+
+<a href="https://example.com" target="_blank" rel="noopener noreferrer">
+    Open Website
+</a>
+<!-- target="_blank" opens the link in a new tab.
+     rel="noopener noreferrer" improves security/privacy when using _blank -->
+
+
+<a href="#contact">Contact</a>
+<!-- Links to an element with id="contact" on the same page -->
+
+
+<a href="mailto:user@example.com">Email Us</a>
+<!-- Opens the user's default email client -->
+
+
+<a href="tel:+911234567890">Call Us</a>
+<!-- Opens the phone/dialer application on supported devices -->
+
+
+<!--
+IMPORTANT CONVENTIONS:
+• Use <a> for navigation/links; use <button> for actions.
+• href contains the destination of the link.
+• Use descriptive link text:
+      Good:  <a href="/docs">Read Documentation</a>
+      Avoid: <a href="/docs">Click here</a>
+• Use relative URLs for pages within the same website when appropriate.
+• target="_blank" opens a new tab; use rel="noopener noreferrer" with it.
+• Links can point to pages, sections, files, email addresses, phone numbers, etc.
+• Make links keyboard-accessible and visually distinguishable.
+-->

@@ -1,0 +1,107 @@
+<!-- CSS -->
+<link rel="stylesheet" href="/css/styles.css">
+<!-- Loads an external CSS stylesheet -->
+
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico">
+<!-- Sets the browser tab/site icon -->
+
+
+<!-- Preload -->
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Tells the browser to fetch a resource early because it will be needed soon -->
+
+
+<!-- Prefetch -->
+<link rel="prefetch" href="/next-page.html">
+<!-- Fetches a low-priority resource that may be needed in the future -->
+
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://cdn.example.com" crossorigin>
+<!-- Establishes the connection to an external origin early:
+     DNS + TCP + TLS, reducing connection latency when the resource is requested -->
+
+
+<!-- DNS Prefetch -->
+<link rel="dns-prefetch" href="//cdn.example.com">
+<!-- Resolves the domain's DNS early; lighter than preconnect -->
+
+
+<!-- Modulepreload -->
+<link rel="modulepreload" href="/js/app.js">
+<!-- Fetches an ES module early so it is ready when the module is executed -->
+
+
+<!-- Canonical -->
+<link rel="canonical" href="https://example.com/products">
+<!-- Tells search engines which URL is the preferred/canonical version
+     of the page -->
+
+
+<!--
+IMPORTANT DISTINCTIONS:
+
+<link rel="stylesheet">
+→ Load CSS required by the page.
+
+<link rel="icon">
+→ Browser/site icon.
+
+<link rel="preload">
+→ "I KNOW I need this soon."
+→ High-priority early fetch.
+→ Use carefully; don't preload everything.
+
+<link rel="prefetch">
+→ "I MAY need this later."
+→ Low-priority fetch for likely future navigation/resources.
+
+<link rel="preconnect">
+→ "I'll need a connection to this origin soon."
+→ Establish DNS/TCP/TLS connection early.
+
+<link rel="dns-prefetch">
+→ "I'll probably need this domain."
+→ Only performs DNS resolution.
+
+<link rel="modulepreload">
+→ "I need this JavaScript module soon."
+→ Fetches and prepares an ES module early.
+
+<link rel="canonical">
+→ "This is the preferred URL for this content."
+→ Mainly SEO; helps prevent duplicate-URL confusion.
+
+
+PERFORMANCE RULE:
+
+Critical resource needed immediately
+        ↓
+    preload
+
+External origin needed soon
+        ↓
+   preconnect
+
+External domain may be needed
+        ↓
+  dns-prefetch
+
+Resource may be needed later
+        ↓
+    prefetch
+
+JavaScript ES module needed early
+        ↓
+ modulepreload
+
+
+IMPORTANT:
+• Don't use preload/prefetch/preconnect everywhere.
+• They are browser performance hints, not guarantees.
+• Incorrect preloading can waste bandwidth and hurt performance.
+• <link rel="canonical"> should normally use an absolute,
+  preferred URL.
+-->

@@ -1,0 +1,66 @@
+<iframe
+    src="https://example.com"
+    title="Example website"
+    width="800"
+    height="600"
+    loading="lazy"
+    allowfullscreen
+></iframe>
+<!--
+    src          → URL of the external page/resource to embed
+
+    title        → Describes the iframe for screen readers
+                   (important for accessibility)
+
+    width/height → Defines iframe dimensions and helps prevent
+                   layout shifts
+
+    loading      → Controls when iframe loads:
+                   lazy → Load when near the viewport
+                   eager → Load immediately
+
+    allowfullscreen
+                 → Allows fullscreen mode when supported
+-->
+
+
+<!-- YouTube example -->
+<iframe
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    title="YouTube video"
+    width="560"
+    height="315"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+
+
+<!--
+IMPORTANT BEST PRACTICES:
+
+• Use <iframe> to embed another document/resource inside your page.
+• Always provide a meaningful title for accessibility.
+• Use loading="lazy" for non-critical/offscreen iframes.
+• Use width + height to reduce layout shifts (CLS).
+• Only embed trusted/required external content.
+• Avoid unnecessary iframes because they can increase:
+  → Network requests
+  → Memory usage
+  → CPU usage
+  → Page load cost
+
+• Common uses:
+  → YouTube/video players
+  → Google Maps
+  → Payment/authentication widgets
+  → External documents
+  → Third-party tools/widgets
+
+• For security-sensitive embeds, consider:
+  sandbox="..."
+  → Restricts what the embedded document is allowed to do.
+
+• Use <iframe> for embedding external content,
+  NOT as a general replacement for normal HTML pages/components.
+-->

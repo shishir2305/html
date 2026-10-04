@@ -1,0 +1,98 @@
+<!--
+CRITICAL RENDERING PATH (CRP)
+
+HTML
+ ↓
+DOM
+ ↓
+CSS
+ ↓
+CSSOM
+ ↓
+DOM + CSSOM
+ ↓
+Render Tree
+ ↓
+Layout
+ ↓
+Paint
+ ↓
+Composite
+ ↓
+Pixels on screen
+
+
+1. HTML → DOM
+   Browser parses HTML and builds the DOM tree.
+
+2. CSS → CSSOM
+   Browser parses CSS and builds the CSSOM tree.
+
+3. DOM + CSSOM → Render Tree
+   Browser determines which elements/styles need to be rendered.
+   display: none elements are excluded from the render tree.
+
+4. Layout (Reflow)
+   Browser calculates:
+   → Position
+   → Width/height
+   → Size
+   → Relationships between elements
+
+5. Paint
+   Browser draws:
+   → Text
+   → Colors
+   → Borders
+   → Images
+   → Shadows
+
+6. Composite
+   Browser combines rendered layers and displays the final pixels.
+
+
+IMPORTANT PERFORMANCE CONCEPTS:
+
+• CSS is render-blocking by default.
+  → Browser generally needs CSSOM before rendering styled content.
+
+• JavaScript can block HTML parsing.
+  → Use defer/module for most application scripts.
+
+• Large CSS
+  → More CSS to parse and process → slower rendering.
+
+• Large JavaScript
+  → More parsing/execution work → can delay interactivity.
+
+• Images are generally NOT render-blocking,
+  but large images can significantly affect LCP.
+
+• Fonts can affect text rendering and LCP.
+  → Preload only critical fonts when justified.
+
+• Minimize critical resources.
+  → Reduce critical CSS/JS/image work.
+
+• Optimize the LCP resource.
+  → Don't lazy-load the main LCP image.
+  → Consider fetchpriority="high" when appropriate.
+
+• Avoid unnecessary layout shifts.
+  → Provide width/height for images and videos.
+
+
+CRITICAL PATH GOAL:
+
+Reduce the amount of work required before
+the browser can display useful content.
+
+Fewer critical resources
+        +
+Smaller critical resources
+        +
+Correct resource priorities
+        ↓
+Faster First Contentful Paint (FCP)
+and potentially better Largest Contentful Paint (LCP)
+-->

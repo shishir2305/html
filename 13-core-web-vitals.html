@@ -1,0 +1,124 @@
+<!--
+CORE WEB VITALS
+
+Core Web Vitals measure real-user web performance and focus on
+loading, responsiveness, and visual stability.
+
+1. LCP — Largest Contentful Paint
+   Measures:
+   → How quickly the largest visible content element loads.
+
+   Usually:
+   → Hero image
+   → Large heading
+   → Main content block
+
+   GOOD:       ≤ 2.5s
+   NEEDS WORK: 2.5s – 4.0s
+   POOR:       > 4.0s
+
+   Optimize:
+   → Optimize/preload critical images
+   → Use fetchpriority="high" for the LCP image when appropriate
+   → Reduce render-blocking CSS/JS
+   → Improve server response time
+   → Use CDN/caching
+   → Optimize fonts
+
+
+2. INP — Interaction to Next Paint
+   Measures:
+   → How quickly the page responds visually to user interactions.
+
+   Examples:
+   → Click
+   → Tap
+   → Keyboard interaction
+
+   GOOD:       ≤ 200ms
+   NEEDS WORK: 200ms – 500ms
+   POOR:       > 500ms
+
+   Optimize:
+   → Reduce JavaScript execution
+   → Break up long tasks
+   → Avoid unnecessary re-renders
+   → Keep event handlers lightweight
+   → Move expensive work off the main thread when possible
+
+
+3. CLS — Cumulative Layout Shift
+   Measures:
+   → Unexpected movement of visible content during page loading/lifetime.
+
+   Common causes:
+   → Images without dimensions
+   → Ads/iframes without reserved space
+   → Dynamically injected content
+   → Fonts causing layout changes
+
+   GOOD:       ≤ 0.1
+   NEEDS WORK: 0.1 – 0.25
+   POOR:       > 0.25
+
+   Optimize:
+   → Set width + height on images/videos
+   → Reserve space for dynamic content
+   → Avoid inserting content above existing content
+   → Handle web fonts carefully
+
+
+IMPORTANT:
+
+LCP → Loading performance
+INP → Responsiveness
+CLS → Visual stability
+
+
+OTHER IMPORTANT WEB PERFORMANCE METRICS:
+
+FCP — First Contentful Paint
+→ When the first piece of DOM content is painted.
+
+TTFB — Time to First Byte
+→ Time from request to receiving the first byte from the server.
+
+These are NOT Core Web Vitals, but are important diagnostic metrics.
+
+
+CRITICAL PATH CONNECTION:
+
+HTML
+ ↓
+DOM + CSSOM
+ ↓
+Render Tree
+ ↓
+Layout
+ ↓
+Paint
+ ↓
+LCP
+
+JavaScript
+ ↓
+Main-thread work
+ ↓
+Interactions
+ ↓
+INP
+
+Layout changes
+ ↓
+Unexpected movement
+ ↓
+CLS
+
+
+IMPORTANT PERFORMANCE RULE:
+
+Don't optimize only for Lighthouse scores.
+
+Real-user data (field data) is what matters most for
+understanding actual Core Web Vitals performance.
+-->

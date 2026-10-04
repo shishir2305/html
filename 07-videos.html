@@ -1,0 +1,90 @@
+<video
+    src="video.mp4"
+    controls
+    width="800"
+    height="450"
+    preload="metadata"
+    poster="thumbnail.jpg"
+>
+    Your browser does not support the video element.
+</video>
+<!--
+    src       → Video file URL
+
+    controls  → Shows play, pause, volume, fullscreen, etc.
+
+    width + height
+              → Defines display dimensions and helps prevent CLS
+
+    preload   → Controls initial loading:
+                none     → Don't preload video
+                metadata → Load metadata only
+                auto     → Browser may preload video
+
+    poster    → Thumbnail shown before video playback
+-->
+
+
+<!-- Multiple formats -->
+<video controls width="800" height="450" preload="metadata">
+    <source src="video.webm" type="video/webm">
+    <source src="video.mp4" type="video/mp4">
+
+    Your browser does not support the video element.
+</video>
+<!--
+    <source> → Allows the browser to choose a supported format.
+-->
+
+
+<!-- Video with captions -->
+<video controls width="800" height="450">
+    <source src="video.mp4" type="video/mp4">
+
+    <track
+        src="captions.vtt"
+        kind="subtitles"
+        srclang="en"
+        label="English"
+    >
+</video>
+<!--
+    <track> → Adds subtitles/captions using a WebVTT (.vtt) file.
+-->
+
+
+<!-- Autoplay video -->
+<video
+    src="background.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+>
+</video>
+<!--
+    autoplay   → Starts playback automatically
+    muted      → Required/recommended for reliable autoplay
+    loop       → Replays continuously
+    playsinline→ Plays inline on mobile instead of forcing fullscreen
+-->
+
+
+<!--
+IMPORTANT BEST PRACTICES:
+
+• Use <video> for video content.
+• Prefer preload="metadata" or "none" for non-critical videos.
+• Avoid preload="auto" for large videos unless genuinely needed.
+• Always provide width + height to reduce layout shift (CLS).
+• Use poster for a useful preview image.
+• Use <source> when multiple formats are required.
+• Provide captions/subtitles for accessibility.
+• Compress/encode videos appropriately.
+• Use CDN/streaming for large production videos.
+• Avoid autoplay unless there is a strong UX reason.
+• Never use huge video files when a properly optimized version is enough.
+• <video> is semantic HTML; don't use <iframe> unless embedding an
+  external video platform/player.
+-->

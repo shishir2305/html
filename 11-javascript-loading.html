@@ -1,0 +1,82 @@
+<!-- 1. Normal script -->
+<script src="app.js"></script>
+<!--
+    Browser:
+    → Downloads app.js
+    → Blocks HTML parsing
+    → Executes JavaScript
+    → Continues parsing HTML
+-->
+
+
+<!-- 2. defer — recommended for most application scripts -->
+<script src="app.js" defer></script>
+<!--
+    Browser:
+    → Downloads JavaScript in parallel with HTML parsing
+    → Continues parsing without blocking
+    → Executes after HTML parsing is complete
+
+    Multiple defer scripts execute in document order.
+-->
+
+
+<!-- 3. async — independent scripts -->
+<script src="analytics.js" async></script>
+<!--
+    Browser:
+    → Downloads JavaScript in parallel with HTML parsing
+    → Executes immediately when downloaded
+    → May interrupt HTML parsing
+
+    Multiple async scripts execute whenever each finishes.
+    Execution order is NOT guaranteed.
+
+    Good for: analytics, ads, independent third-party scripts.
+-->
+
+
+<!-- 4. ES Modules -->
+<script type="module" src="app.js"></script>
+<!--
+    Module scripts are:
+    → Deferred by default
+    → Downloaded without blocking HTML parsing
+    → Executed after HTML parsing
+    → Strict mode automatically enabled
+    → Support import/export
+-->
+
+
+<!-- 5. Module preload -->
+<link rel="modulepreload" href="/js/app.js">
+<script type="module" src="/js/app.js"></script>
+<!--
+    Starts fetching the module earlier so it can be ready
+    sooner when the module script is executed.
+-->
+
+
+<!--
+IMPORTANT DIFFERENCE:
+
+                    Download      HTML Parsing      Execution
+
+Normal             BLOCKS         BLOCKS            Immediately
+defer              Parallel       Continues         After parsing
+async              Parallel       Continues         When downloaded
+module             Parallel       Continues         After parsing
+
+
+IMPORTANT BEST PRACTICES:
+
+• Use defer for traditional application scripts when appropriate.
+• Use type="module" for modern JavaScript applications.
+• Use async for independent scripts where execution order doesn't matter.
+• Avoid normal blocking <script> in <head> unless there is a specific reason.
+• async scripts have NO guaranteed execution order.
+• defer scripts execute in document order.
+• module scripts are deferred by default.
+• Don't use both async and defer expecting defer behavior;
+  async takes precedence.
+-->

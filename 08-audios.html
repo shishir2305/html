@@ -1,0 +1,45 @@
+<audio
+    src="audio.mp3"
+    controls
+    preload="metadata"
+>
+    Your browser does not support the audio element.
+</audio>
+<!--
+    src      → Audio file URL
+
+    controls → Shows play, pause, volume, and other playback controls.
+
+    preload  → Controls initial loading:
+               none     → Don't preload audio
+               metadata → Load metadata only
+               auto     → Browser may preload audio
+-->
+
+
+<!-- Multiple audio formats -->
+<audio controls preload="metadata">
+    <source src="audio.ogg" type="audio/ogg">
+    <source src="audio.mp3" type="audio/mpeg">
+
+    Your browser does not support the audio element.
+</audio>
+<!--
+    <source> → Lets the browser choose a supported audio format.
+-->
+
+
+<!--
+IMPORTANT BEST PRACTICES:
+
+• Use <audio> for audio content.
+• Use controls when users need playback controls.
+• Prefer preload="metadata" or "none" for non-critical audio.
+• Avoid preload="auto" for large audio files.
+• Use <source> when providing multiple formats.
+• Compress/optimize audio to reduce bandwidth.
+• Don't autoplay audio unexpectedly; it creates a poor UX.
+• Provide a text transcript when the audio contains important information.
+• Use semantic <audio> instead of custom JavaScript audio controls
+  unless custom UI is actually required.
+-->

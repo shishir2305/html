@@ -1,0 +1,62 @@
+<table>
+    <caption>Employee Details</caption>
+    <!-- Describes what the table represents -->
+
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Experience</th>
+        </tr>
+    </thead>
+    <!-- <thead> contains column headings -->
+
+    <tbody>
+        <tr>
+            <td>Shishir</td>
+            <td>Software Engineer</td>
+            <td>2 Years</td>
+        </tr>
+
+        <tr>
+            <td>Rahul</td>
+            <td>Frontend Engineer</td>
+            <td>3 Years</td>
+        </tr>
+    </tbody>
+    <!-- <tbody> contains the main table data -->
+
+    <tfoot>
+        <tr>
+            <td colspan="3">Total Employees: 2</td>
+        </tr>
+    </tfoot>
+    <!-- <tfoot> contains summary/footer information -->
+</table>
+
+
+<!--
+IMPORTANT:
+
+<table>    → Creates the table.
+<tr>       → Table row.
+<th>       → Header cell.
+<td>       → Data cell.
+<thead>    → Header section.
+<tbody>    → Main data section.
+<tfoot>    → Footer/summary section.
+<caption>  → Table description/title.
+
+scope="col"
+→ Tells assistive technologies that the <th> represents a column.
+
+colspan="3"
+→ Makes one cell span across 3 columns.
+
+IMPORTANT:
+• Use <table> for tabular data, NOT for page layout.
+• Use <th> for headings and <td> for data.
+• Use <caption> when the table needs a meaningful title.
+• Use scope="col" / scope="row" to improve accessibility.
+• Use CSS for table styling and layout.
+-->
